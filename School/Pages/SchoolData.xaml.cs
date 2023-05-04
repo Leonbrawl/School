@@ -35,13 +35,9 @@ namespace School.Pages
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             var selectedProduct = DataGrid.SelectedItem as Dance;
-            if (selectedProduct != null)
-            {
-                MessageBox.Show("Выберите товар");
-                return;
-            }
             selectedProduct.IsDelete = true;
             App.db.SaveChanges();
+            ListView.ItemSource = App.db.Dance.Where(x => x.IsDelete != true).ToList();
         }
     }
 }
